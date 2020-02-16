@@ -41,11 +41,11 @@
 	this.tiltDown = defoptions(),
 	this.tiltClockwise = defoptions();
 	this.tiltConterclockwise = defoptions();
-	this.dimbuffer = 5;
-	this.dimbufferdiscard = 150;
+	this.dimbuffer = 2;
+	this.dimbufferdiscard = 20;
 	this.buffer = new Array();
-	this.frequency = 2000;
-	this.overlap = 1.8;
+	this.frequency = 1500;
+	this.overlap = 1;
 	this.notSupported = "";
 	this.tap_interval = 200;
 	this.taphold_interval = 200;
