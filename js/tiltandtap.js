@@ -42,7 +42,7 @@
 	this.tiltClockwise = defoptions();
 	this.tiltConterclockwise = defoptions();
 	this.dimbuffer = 2;
-	this.dimbufferdiscard = 20;
+	this.dimbufferdiscard = 150;
 	this.buffer = new Array();
 	this.frequency = 1500;
 	this.overlap = 1;
