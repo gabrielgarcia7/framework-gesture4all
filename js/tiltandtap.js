@@ -84,7 +84,7 @@
 		touch : "none",//touch can be: "hold" or a number indicating the number of taps
 		element : null,
 		touchcallback : undefined,
-		th_android :  75,
+		th_android :  300,
 		th_windowsphone : 75,
 		th_ios : 180,
 		th : 75
