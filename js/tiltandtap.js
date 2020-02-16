@@ -41,7 +41,7 @@
 	this.tiltDown = defoptions(),
 	this.tiltClockwise = defoptions();
 	this.tiltConterclockwise = defoptions();
-	this.dimbuffer = 1;
+	this.dimbuffer = 2;
 	this.dimbufferdiscard = 40;
 	this.buffer = new Array();
 	this.frequency = 100;
