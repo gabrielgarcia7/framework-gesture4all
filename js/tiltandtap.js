@@ -81,7 +81,7 @@
 		audiofeedback : "none",
 		vibrationfeedback : "none",
 		visualfeedback : "none",
-		touch : "none",//touch can be: "hold" or a number indicating the number of taps
+		touch : "hold",//touch can be: "hold" or a number indicating the number of taps
 		element : null,
 		touchcallback : undefined,
 		th_android :  300,
