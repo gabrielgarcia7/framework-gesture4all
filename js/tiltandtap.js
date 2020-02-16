@@ -45,7 +45,7 @@
 	this.dimbufferdiscard = 150;
 	this.buffer = new Array();
 	this.frequency = 1500;
-	this.overlap = 1;
+	this.overlap = 5;
 	this.notSupported = "";
 	this.tap_interval = 1000;
 	this.taphold_interval = 1000;
