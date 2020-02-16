@@ -41,15 +41,15 @@
 	this.tiltDown = defoptions(),
 	this.tiltClockwise = defoptions();
 	this.tiltConterclockwise = defoptions();
-	this.dimbuffer = 2;
+	this.dimbuffer = 10;
 	this.dimbufferdiscard = 150;
 	this.buffer = new Array();
 	this.frequency = 1500;
-	this.overlap = 5;
+	this.overlap = 1;
 	this.notSupported = "";
-	this.tap_interval = 1000;
-	this.taphold_interval = 1000;
-	this.touch_interval = 1000;
+	this.tap_interval = 200;
+	this.taphold_interval = 200;
+	this.touch_interval = 200;
 	
 	//utility variables
 	//array of tilting interactions that dev want to perform
