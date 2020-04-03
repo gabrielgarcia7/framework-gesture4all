@@ -45,3 +45,7 @@ video {
       width: 50%;
       height: auto;
 }
+
+h1 {
+  font-size: 18px;
+}
