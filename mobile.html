@@ -1,3 +1,20 @@
+<!--
+TO DO LIST
+
+- fazer configuração inicial botoes->gestos (function configuracao());
+  - capturar botão acionado (OK!)
+  - menu interativo de configuração;
+  - linkar botão diretamente com o gesto (como?)
+  - como funcionaria semântica? já que linkaríamos por exemplo botão1 -> inclinar pra trás
+- pesquisar sobre os cookies para guardar as configurações;
+- dicionario ações <-> gestos em um arquivo? ou somente cookies?
+- rever framework Tilt&Tap (tem hora que funciona, tem hora que não). Trocar?
+- salvar configuração nos cookies;
+- criar função que recupera as informações dos cookies;
+
+-->
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
@@ -20,12 +37,104 @@
     <script src="js/gesture4all.js"></script>
     <script src="js/actionFuncions.js"></script>
 
+    <script>
+      function play(){
+       //Play function
+        if(player.pause){
+          player.play();
+        }
+       //feedback
+        audioPlay(); //audivel
+        blinkPlay(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "cima"; //visual
+        console.log("cima"); //log   
+      }
+
+
+      function pause(){
+       //Pause function
+        if(player.play){
+           player.pause();
+        }
+       //feedback
+        audioPause(); //audivel
+        blinkPause(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "baixo"; //visual
+        console.log("baixo"); //log
+      }
+
+
+      function volumeMais(){
+       //Audio function
+        setVolume(.1) //up by 10%
+       //feedback
+        audioMaisVolume(); //audivel
+        blinkMaisVolume(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "direita"; //visual
+        console.log("direita"); //log     
+      }
+
+
+      function volumeMenos(){
+       //Audio function
+        setVolume(-.1); //down by 10%
+       //feedback
+        audioMenosVolume(); //audivel
+        blinkMenosVolume(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "esquerda"; //visual
+        console.log("esquerda"); //log     
+      }
+
+
+      function avancar(){
+       //Time function
+        setTime(10);
+       //feedback
+        audioAvancar(); //audivel
+        blinkAvancar(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "horário"; //visual
+        console.log("horário"); //log
+      }
+
+
+      function retroceder(){
+       //Time function
+        setTime(-10);
+       //feedback
+        audioRetroceder(); //audivel
+        blinkRetroceder(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "anti-horário"; //visual
+        console.log("anti-horário"); //log        
+      }
+
+      function teste(){
+        audioRetroceder();
+        audioPlay();
+        audioMenosVolume();
+        audioAvancar();
+        audioPause();
+        audioMaisVolume();
+      }
+    </script>
+
     <title>Gesture4ALL</title>
+
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> 
 
   </head>
 
   <body>
-
+    <script>
+  $(document).ready(function(){
+    configuracao();
+  });
+</script>
     <!-- CABEÇALHO -->
     <header id="header">
       <div>
@@ -48,14 +157,26 @@
     Último gesto reconhecido: <b><span id="result"></span></b><br>
     Instruções:
     <ul>
-      <li>Play: <button type="button" onclick="gesto('inclinarTras')">Incline para trás</button></li> 
-      <li>Pause: <button type="button" onclick="gesto('inclinarFrente')">Incline para frente</button></li> 
-      <li>Mais Volume: <button type="button" onclick="gesto('inclinarDireita')">Incline para direita</button></li> 
-      <li>Menos Volume: <button type="button" onclick="gesto('inclinarEsquerda')">Incline para esquerda</button></li> 
-      <li>Avançar: <button type="button" onclick="gesto('rotacaoDireita')">Gire para direita</button></li> 
-      <li>Retroceder: <button type="button" onclick="gesto('rotacaoEsquerda')">Gire para esquerda</button></li> 
-      <li><button type="button" onclick="gesto()">Testar audio</button></li>
+      <li><button id="play" type="button" onclick="play()">Play</button></li> 
+      <li><button id="pause" type="button" onclick="pause()">Pause</button></li> 
+      <li><button id="volumeMais" type="button" onclick="volumeMais()">Mais Volume</button></li> 
+      <li><button id="volumeMenos" type="button" onclick="volumeMenos()">Menos Volume</button></li> 
+      <li><button id="avancar" type="button" onclick="avancar()">Avançar</button></li> 
+      <li><button id="retroceder" type="button" onclick="retroceder()">Retroceder</button></li>
     </ul>
+
+    <p id = "GFG_DOWN" style =  
+            "color:green; font-size: 20px; font-weight: bold;"> 
+    </p>
+
+    <script>
+      /*$('#GFG_UP').text("Click on button to get ID"); 
+
+      $("button").on('click',function() { 
+        var t = (this.id); 
+        $('#GFG_DOWN').text("ID = " + t); 
+      });  */
+    </script>
     
   </body>
 </html>

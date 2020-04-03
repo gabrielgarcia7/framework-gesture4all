@@ -8,130 +8,77 @@ var mytat = new tiltandtap({
   tiltConterclockwise : {callback: gesto('rotacaoEsquerda')} //time-
 });
 
+// Irá receber os ids dos botoes, referente à ação que deve realizar;
+var inclinarTras;
+var inclinarFrente;
+var inclinarDireita;
+var inclinarEsquerda;
+var rotacaoDireita;
+var rotacaoEsquerda;
 
-//var inclinarTras = {gesto: "inclinarTras", funcao: pause()};
-var inclinarTras = 'play'
-var inclinarFrente = 'pause';
-var inclinarDireita = 'volumeMais';
-var inclinarEsquerda = 'volumeMenos';
-var rotacaoDireita = 'avancar';
-var rotacaoEsquerda = 'retroceder';
 
-//var gestos = [gesto:'play', gesto:'pause', gesto:'volumeMais', gesto:'volumeMenos', gesto:'avancar', gesto:'retroceder'];
+var msg = "a";
+
 
 function gesto(){
 
   switch(arguments[0]){
 
     case 'inclinarTras':
-      play();
+      realizarAcao(inclinarTras);
       break;
 
     case 'inclinarFrente':
-      pause();
+      realizarAcao(inclinarFrente);
       break;
 
     case 'inclinarDireita':
-      volumeMais();
+      realizarAcao(inclinarDireita);
       break;
 
     case 'inclinarEsquerda':
-      volumeMenos();
+      realizarAcao(inclinarEsquerda);
       break;
 
     case 'rotacaoDireita':
-      avancar();
+      realizarAcao(rotacaoDireita);
       break;
 
     case 'rotacaoEsquerda':
-      retroceder();
+      realizarAcao(rotacaoEsquerda);
       break;
-
-  }
-  
+  }  
 }
 
-
-function play(){
- //Play function
-  if(player.pause){
-    player.play();
-  }
- //feedback
-  audioPlay(); //audivel
-  blinkPlay(); //visual
-  window.navigator.vibrate(50); //tátil
-  document.getElementById("result").innerHTML = "cima"; //visual
-  console.log("cima"); //log   
+function realizarAcao(botao){
+  document.getElementById(botao).click();
 }
 
+function configuracao(){
 
-function pause(){
- //Pause function
-  if(player.play){
-     player.pause();
-  }
- //feedback
-  audioPause(); //audivel
-  blinkPause(); //visual
-  window.navigator.vibrate(50); //tátil
-  document.getElementById("result").innerHTML = "baixo"; //visual
-  console.log("baixo"); //log
-}
+  var aux = 0;
+  var mensagemConfig = ["inclinar para trás", "inclinar para frente", "inclinar para a esquerda",
+                      "inclinar para a direita", "rotacionar para a esquerda", "rotacionar para a direita"];
 
 
-function volumeMais(){
- //Audio function
-  setVolume(.1) //up by 10%
- //feedback
-  audioMaisVolume(); //audivel
-  blinkMaisVolume(); //visual
-  window.navigator.vibrate(50); //tátil
-  document.getElementById("result").innerHTML = "direita"; //visual
-  console.log("direita"); //log     
-}
+  alert("Vamos configurar os botões de acordo com os gestos disponíveis!");
+  alert("Selecione o botão referente ao gesto de " + mensagemConfig[aux]);
 
+  $("button").on('click',function() { 
+    var t = (this.id); 
+    $('#GFG_DOWN').text("ID = " + t);
+    inclinarTras = t;
+    aux++;
+    if(aux < 6){
+      alert("Gesto configurado com sucesso. Pressione OK (ou ENTER) para prosseguir.")
+      alert("Selecione o botão referente ao gesto de " + mensagemConfig[aux]);
+    }
+    
+  });
 
-function volumeMenos(){
- //Audio function
-  setVolume(-.1); //down by 10%
- //feedback
-  audioMenosVolume(); //audivel
-  blinkMenosVolume(); //visual
-  window.navigator.vibrate(50); //tátil
-  document.getElementById("result").innerHTML = "esquerda"; //visual
-  console.log("esquerda"); //log     
-}
+  // Salvar configuração nos cookies;
+  // Criar função que recupera informações do cookir;
 
+  //alert("Gestos configurados com sucesso!");
 
-function avancar(){
- //Time function
-  setTime(10);
- //feedback
-  audioAvancar(); //audivel
-  blinkAvancar(); //visual
-  window.navigator.vibrate(50); //tátil
-  document.getElementById("result").innerHTML = "horário"; //visual
-  console.log("horário"); //log
-}
-
-
-function retroceder(){
- //Time function
-  setTime(-10);
- //feedback
-  audioRetroceder(); //audivel
-  blinkRetroceder(); //visual
-  window.navigator.vibrate(50); //tátil
-  document.getElementById("result").innerHTML = "anti-horário"; //visual
-  console.log("anti-horário"); //log        
-}
-
-function teste(){
-  audioRetroceder();
-  audioPlay();
-  audioMenosVolume();
-  audioAvancar();
-  audioPause();
-  audioMaisVolume();
 }
