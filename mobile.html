@@ -36,13 +36,14 @@
     </header>
     
     <!-- CORPO -->
-    <h1>Opção 1: Testando com Smartphone</h1>
-    <p><a href="index.html">Voltar a tela anterior</a></p>
+    <b>Opção 1: Testando com Smartphone</b><br>
+    <a href="index.html">Voltar a tela anterior</a><br>
 
-    <video autoplay width="400" id="player">
-      <source src="assets/olhardigital.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
-      Seu navegador não suporta vídeo em HTML 5.
-    </video><br>
+    <video autoplay width="400" id="player" controls preload="auto">
+    <source src="assets/olhardigital.webm" type='video/webm; codecs="vp8, vorbis"' />
+    <source src="assets/olhardigital.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+    Seu navegador não suporta vídeo em HTML 5.
+  </video><br>
 
     Último gesto reconhecido: <b><span id="result"></span></b><br>
     Instruções:
