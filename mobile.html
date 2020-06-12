@@ -17,13 +17,85 @@
   <script>
     window.focus();   
     var mytat = new tiltandtap({
-      tiltLeft :  {callback: volumeMenos}, //volume-
-      tiltRight : {callback: volumeMais}, //volume+
-      tiltUp :    {callback: play}, //play
-      tiltDown:   {callback: pause}, //pause
-      tiltClockwise: {callback: avancar}, //time+
-      tiltConterclockwise : {callback: retroceder} //time-
+      tiltLeft :  {callback: gesto('inclinarEsquerda')}, //volume-
+      tiltRight : {callback: gesto('inclinarDireita')}, //volume+
+      tiltUp :    {callback: gesto('inclinarTras')}, //play
+      tiltDown:   {callback: gesto('inclinarFrente')}, //pause
+      tiltClockwise: {callback: gesto('rotacaoDireita')}, //time+
+      tiltConterclockwise : {callback: gesto('rotacaoEsquerda')} //time-
     });
+
+    var gestos = [
+      "inclinarTras",
+      "inclinarFrente",
+      "inclinarDireita",
+      "inclinarEsquerda",
+      "rotacaoDireita",
+      "rotacaoEsquerda"
+    ];
+
+    function gesto(){
+
+      switch(arguments[0]){
+
+        case 'inclinarTras':
+          realizarAcao(gestos[0]);
+          break;
+
+        case 'inclinarFrente':
+          realizarAcao(gestos[1]);
+          break;
+
+        case 'inclinarDireita':
+          realizarAcao(gestos[2]);
+          break;
+
+        case 'inclinarEsquerda':
+          realizarAcao(gestos[3]);
+          break;
+
+        case 'rotacaoDireita':
+          realizarAcao(gestos[4]);
+          break;
+
+        case 'rotacaoEsquerda':
+          realizarAcao(gestos[5]);
+          break;
+      }  
+    }
+
+    function configuracao(){
+
+      var aux = 0;
+      var mensagemConfig = ["inclinar para trás", "inclinar para frente", "inclinar para a esquerda",
+                          "inclinar para a direita", "rotacionar para a esquerda", "rotacionar para a direita"];
+
+
+      alert("Vamos configurar os botões de acordo com os gestos disponíveis!");
+      alert("Selecione o botão referente ao gesto de " + mensagemConfig[aux]);
+
+      $("button").on('click',function() { 
+        var t = (this.id); 
+        $('#GFG_DOWN').text("ID = " + t);
+        gesto[aux] = t;
+        aux++;
+        if(aux < 6){
+          alert("Gesto configurado com sucesso. Pressione OK (ou ENTER) para prosseguir.")
+          alert("Selecione o botão referente ao gesto de " + mensagemConfig[aux]);
+        }
+        
+      });
+
+      // Salvar configuração nos cookies;
+      // Criar função que recupera informações do cookir;
+
+      //alert("Gestos configurados com sucesso!");
+
+    }
+
+    function realizarAcao(botao){
+      document.getElementById(botao).click();
+    }
 
     function play(){
        //Play function
@@ -114,6 +186,12 @@
   </head>
 
   <body>
+    <script>
+      $(document).ready(function(){
+        configuracao();
+      });
+    </script>
+
     <header id="header">
      <div>
       <a href="" class="logo">
@@ -128,17 +206,20 @@
     <source src="assets/olhardigital.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
     Seu navegador não suporta vídeo em HTML 5.
   </video><br>
-  <p>v01</p>
+  <p>v03</p>
   Último gesto reconhecido: <b><span id="result"></span></b><br>
   Instruções:
   <ul>
-    <li>Play: <b>Incline para trás</b></li>
-    <li>Pause: <b>Incline para frente</b></li>
-    <li>Mais Volume: <b>Incline para direita</b></li>
-    <li>Menos Volume: <b>Incline para esquerda</b></li>
-    <li>Avançar: <b>Gire para direita</b></li>
-    <li>Retroceder: <b>Gire para esquerda</b></li>
-    <li><button type="button" onclick="teste()">Testar audio</button></li>
+    <li><button id="play" type="button" onclick="play()">Play</button></li> 
+    <li><button id="pause" type="button" onclick="pause()">Pause</button></li> 
+    <li><button id="volumeMais" type="button" onclick="volumeMais()">Mais Volume</button></li> 
+    <li><button id="volumeMenos" type="button" onclick="volumeMenos()">Menos Volume</button></li> 
+    <li><button id="avancar" type="button" onclick="avancar()">Avançar</button></li> 
+    <li><button id="retroceder" type="button" onclick="retroceder()">Retroceder</button></li>
   </ul>
+
+  <p id = "GFG_DOWN" style =  
+          "color:green; font-size: 20px; font-weight: bold;"> 
+  </p>
 </body>
 </html>
