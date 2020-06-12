@@ -17,12 +17,12 @@
   <script>
     window.focus();   
     var mytat = new tiltandtap({
-      tiltLeft :  {callback: gesto('inclinarEsquerda')}, //volume-
-      tiltRight : {callback: gesto('inclinarDireita')}, //volume+
-      tiltUp :    {callback: gesto('inclinarTras')}, //play
-      tiltDown:   {callback: gesto('inclinarFrente')}, //pause
-      tiltClockwise: {callback: gesto('rotacaoDireita')}, //time+
-      tiltConterclockwise : {callback: gesto('rotacaoEsquerda')} //time-
+      tiltLeft :  {callback: inclinarEsquerda}, //volume-
+      tiltRight : {callback: inclinarDireita}, //volume+
+      tiltUp :    {callback: inclinarTras}, //play
+      tiltDown:   {callback: inclinarFrente}, //pause
+      tiltClockwise: {callback: rotacaoDireita}, //time+
+      tiltConterclockwise : {callback: rotacaoEsquerda} //time-
     });
 
     var gestos = [
@@ -34,41 +34,29 @@
       "rotacaoEsquerda"
     ];
 
-    function gesto(){
+    function inclinarEsquerda(){
+      document.getElementById("play").click();
+      alert("funfou");
 
-      switch(arguments[0]){
-
-        case 'inclinarTras':
-          document.getElementById("play").click();
-          // realizarAcao(gestos[0]);
-          break;
-
-        case 'inclinarFrente':
-          document.getElementById("pause").click();
-          // realizarAcao(gestos[1]);
-          break;
-
-        case 'inclinarDireita':
-          document.getElementById("volumeMais").click();
-          // realizarAcao(gestos[2]);
-          break;
-
-        case 'inclinarEsquerda':
-          document.getElementById("volumeMenos").click();
-          // realizarAcao(gestos[3]);
-          break;
-
-        case 'rotacaoDireita':
-          document.getElementById("avancar").click();
-          // realizarAcao(gestos[4]);
-          break;
-
-        case 'rotacaoEsquerda':
-          document.getElementById("retroceder").click();
-          // realizarAcao(gestos[5]);
-          break;
-      }  
     }
+    function inclinarDireita(){
+      document.getElementById("pause").click();
+    }
+
+    function inclinarTras(){
+      document.getElementById("volumeMais").click();
+    }
+    function inclinarFrente(){
+      document.getElementById("volumeMenos").click();
+    }
+    function rotacaoDireita(){
+      document.getElementById("avancar").click();
+    }
+    function rotacaoEsquerda(){
+      document.getElementById("retroceder").click();
+    }
+
+    
 
     function configuracao(){
 
@@ -212,7 +200,7 @@
     <source src="assets/olhardigital.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
     Seu navegador não suporta vídeo em HTML 5.
   </video><br>
-  <p>v04</p>
+  <p>v05</p>
   Último gesto reconhecido: <b><span id="result"></span></b><br>
   Instruções:
   <ul>
