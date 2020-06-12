@@ -55,6 +55,45 @@
       document.getElementById(gestos[5]).click();
     }
 
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      var expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function checkCookie() {
+      var username = getCookie("configured");
+      if (username == "yes") {
+        loadConfigs();
+        alert("Already configured!");
+      } else {
+        configuracao();
+      }
+    }
+
+    function loadConfigs(){
+      for (var i = 0; i < 6; i++) {
+        gestos[i] = getCookie(i);
+      }
+    }
+
     
 
     function configuracao(){
@@ -71,13 +110,16 @@
         var t = (this.id); 
         $('#GFG_DOWN').text("ID = " + t);
         gestos[aux] = t;
+        setCookie(aux, t, 365);
         aux++;
         if(aux < 6){
-          alert("Gesto configurado com sucesso. Pressione OK (ou ENTER) para prosseguir.")
+          alert("Gesto configurado com scesso. Pressione OK (ou ENTER) para prosseguir.")
           alert("Selecione o botão referente ao gesto de " + mensagemConfig[aux]);
         }
         
       });
+
+      setCookie("configured", "yes", 365);
 
       // Salvar configuração nos cookies;
       // Criar função que recupera informações do cookir;
@@ -181,7 +223,7 @@
   <body>
     <script>
       $(document).ready(function(){
-        configuracao();
+        checkCookie();
       });
     </script>
 
