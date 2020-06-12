@@ -1,268 +1,133 @@
-<!--
-TO DO LIST
-
-- fazer configuração inicial botoes->gestos (function configuracao());
-  - capturar botão acionado (OK!)
-  - menu interativo de configuração;
-  - linkar botão diretamente com o gesto (como?)
-  - como funcionaria semântica? já que linkaríamos por exemplo botão1 -> inclinar pra trás
-- pesquisar sobre os cookies para guardar as configurações;
-- dicionario ações <-> gestos em um arquivo? ou somente cookies?
-- rever framework Tilt&Tap (tem hora que funciona, tem hora que não). Trocar?
-- salvar configuração nos cookies;
-- criar função que recupera as informações dos cookies;
-
--->
-
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
-  
-  <head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <style>
+    video {
+      width: 100%;
+      height: auto;
+    }
+  </style>  
+  <script src="js/tiltandtap.js"></script>
+  <script src="js/jquery-2.1.1.min.js"></script>
+  <script src="js/gesture4all.js"></script>
 
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    window.focus();   
+    var mytat = new tiltandtap({
+      tiltLeft :  {callback:left}, //volume-
+      tiltRight : {callback:right}, //volume+
+      tiltUp :    {callback:up}, //play
+      tiltDown:   {callback:down}, //pause
+      tiltClockwise: {callback:clockwise}, //time+
+      tiltConterclockwise : {callback: cc} //time-
+    });
 
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-
-    <style>
-      video {
-        width: 40%;
-        height: auto;
+    function left(){
+     //Audio function
+      setVolume(-.1); //down by 10%
+     //feedback
+      audioMenosVolume(); //audivel
+      blinkMenosVolume(); //visual
+      window.navigator.vibrate(50); //tátil
+      document.getElementById("result").innerHTML = "esquerda"; //visual
+      console.log("esquerda"); //log     
+    }
+    function right(){
+     //Audio function
+      setVolume(.1) //up by 10%
+     //feedback
+      audioMaisVolume(); //audivel
+      blinkMaisVolume(); //visual
+      window.navigator.vibrate(50); //tátil
+      document.getElementById("result").innerHTML = "direita"; //visual
+      console.log("direita"); //log     
+    }
+    function up (){
+     //Play function
+      if(player.pause){
+        player.play();
       }
-    </style>  
-
-    <script src="js/tiltandtap.js"></script>
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/gesture4all.js"></script>
-    <script src="js/actionFuncions.js"></script>
-
-    <script>
-
-      window.focus();   
-      var mytat = new tiltandtap({
-        tiltLeft :  {callback:gesto('inclinarEsquerda')}, //volume-
-        tiltRight : {callback:gesto('inclinarDireita')}, //volume+
-        tiltUp :    {callback:gesto('inclinarTras')}, //play
-        tiltDown:   {callback:gesto('inclinarFrente')}, //pause
-        tiltClockwise: {callback:gesto('rotacaoDireita')}, //time+
-        tiltConterclockwise : {callback: gesto('rotacaoEsquerda')} //time-
-      });
-
-      // Irá receber os ids dos botoes, referente à ação que deve realizar;
-      var inclinarTras;
-      var inclinarFrente;
-      var inclinarDireita;
-      var inclinarEsquerda;
-      var rotacaoDireita;
-      var rotacaoEsquerda;
-
-
-      var msg = "a";
-
-
-      function gesto(){
-
-        switch(arguments[0]){
-
-          case 'inclinarTras':
-            realizarAcao(inclinarTras);
-            break;
-
-          case 'inclinarFrente':
-            realizarAcao(inclinarFrente);
-            break;
-
-          case 'inclinarDireita':
-            realizarAcao(inclinarDireita);
-            break;
-
-          case 'inclinarEsquerda':
-            realizarAcao(inclinarEsquerda);
-            break;
-
-          case 'rotacaoDireita':
-            realizarAcao(rotacaoDireita);
-            break;
-
-          case 'rotacaoEsquerda':
-            realizarAcao(rotacaoEsquerda);
-            break;
-        }  
+     //feedback
+      audioPlay(); //audivel
+      blinkPlay(); //visual
+      window.navigator.vibrate(50); //tátil
+      document.getElementById("result").innerHTML = "cima"; //visual
+      console.log("cima"); //log   
+    }
+    function down(){
+     //Pause function
+      if(player.play){
+         player.pause();
       }
+     //feedback
+      audioPause(); //audivel
+      blinkPause(); //visual
+      window.navigator.vibrate(50); //tátil
+      document.getElementById("result").innerHTML = "baixo"; //visual
+      console.log("baixo"); //log
+    }
+    function clockwise(){
+     //Time function
+      setTime(10);
+     //feedback
+      audioAvancar(); //audivel
+      blinkAvancar(); //visual
+      window.navigator.vibrate(50); //tátil
+      document.getElementById("result").innerHTML = "horário"; //visual
+      console.log("horário"); //log
+    }
+    function cc(){
+     //Time function
+      setTime(-10);
+     //feedback
+      audioRetroceder(); //audivel
+      blinkRetroceder(); //visual
+      window.navigator.vibrate(50); //tátil
+      document.getElementById("result").innerHTML = "anti-horário"; //visual
+      console.log("anti-horário"); //log        
+    }
 
-      function realizarAcao(botao){
-        document.getElementById(botao).click();
-      }
-
-      function configuracao(){
-
-        var aux = 0;
-        var mensagemConfig = ["inclinar para trás", "inclinar para frente", "inclinar para a esquerda",
-                            "inclinar para a direita", "rotacionar para a esquerda", "rotacionar para a direita"];
-
-
-        alert("Vamos configurar os botões de acordo com os gestos disponíveis!");
-        alert("Selecione o botão referente ao gesto de " + mensagemConfig[aux]);
-
-        $("button").on('click',function() { 
-          var t = (this.id); 
-          $('#GFG_DOWN').text("ID = " + t);
-          inclinarTras = t;
-          aux++;
-          if(aux < 6){
-            alert("Gesto configurado com sucesso. Pressione OK (ou ENTER) para prosseguir.")
-            alert("Selecione o botão referente ao gesto de " + mensagemConfig[aux]);
-          }
-          
-        });
-
-        // Salvar configuração nos cookies;
-        // Criar função que recupera informações do cookir;
-
-        //alert("Gestos configurados com sucesso!");
-
-      }
-
-      function play(){
-       //Play function
-        if(player.pause){
-          player.play();
-        }
-       //feedback
-        audioPlay(); //audivel
-        blinkPlay(); //visual
-        window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "cima"; //visual
-        console.log("cima"); //log   
-      }
-
-
-      function pause(){
-       //Pause function
-        if(player.play){
-           player.pause();
-        }
-       //feedback
-        audioPause(); //audivel
-        blinkPause(); //visual
-        window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "baixo"; //visual
-        console.log("baixo"); //log
-      }
-
-
-      function volumeMais(){
-       //Audio function
-        setVolume(.1) //up by 10%
-       //feedback
-        audioMaisVolume(); //audivel
-        blinkMaisVolume(); //visual
-        window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "direita"; //visual
-        console.log("direita"); //log     
-      }
-
-
-      function volumeMenos(){
-       //Audio function
-        setVolume(-.1); //down by 10%
-       //feedback
-        audioMenosVolume(); //audivel
-        blinkMenosVolume(); //visual
-        window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "esquerda"; //visual
-        console.log("esquerda"); //log     
-      }
-
-
-      function avancar(){
-       //Time function
-        setTime(10);
-       //feedback
-        audioAvancar(); //audivel
-        blinkAvancar(); //visual
-        window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "horário"; //visual
-        console.log("horário"); //log
-      }
-
-
-      function retroceder(){
-       //Time function
-        setTime(-10);
-       //feedback
-        audioRetroceder(); //audivel
-        blinkRetroceder(); //visual
-        window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "anti-horário"; //visual
-        console.log("anti-horário"); //log        
-      }
-
-      function teste(){
-        audioRetroceder();
-        audioPlay();
-        audioMenosVolume();
-        audioAvancar();
-        audioPause();
-        audioMaisVolume();
-      }
+    function teste(){
+      audioRetroceder();
+      audioPlay();
+      audioMenosVolume();
+      audioAvancar();
+      audioPause();
+      audioMaisVolume();
+    }
     </script>
 
     <title>Gesture4ALL</title>
-
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> 
-
   </head>
 
   <body>
-    <script>
-  $(document).ready(function(){
-    configuracao();
-  });
-</script>
-    <!-- CABEÇALHO -->
     <header id="header">
-      <div>
-        <a href="" class="logo">
-          <span class="symbol"><img src="images/gesture.svg" alt="" /></span><span class="title">gesture4All</span><br>
-        </a>
-      </div>
-    </header>
-    
-    <!-- CORPO -->
-    <b>Opção 1: Testando com Smartphone</b><br>
-    <a href="index.html">Voltar a tela anterior</a><br>
-
-    <video autoplay width="400" id="player" controls preload="auto">
+     <div>
+      <a href="" class="logo">
+        <span class="symbol"><img src="images/gesture.svg" alt="" /></span><span class="title">gesture4All</span><br>
+      </a>
+    </div>
+  </header>
+  <b>Opção 1: Testando com Smartphone</b><br>
+  <a href="index.html">Voltar a tela anterior</a><br>
+  <video autoplay width="400" id="player" controls preload="auto">
     <source src="assets/olhardigital.webm" type='video/webm; codecs="vp8, vorbis"' />
     <source src="assets/olhardigital.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
     Seu navegador não suporta vídeo em HTML 5.
   </video><br>
-
-    Último gesto reconhecido: <b><span id="result"></span></b><br>
-    Instruções:
-    <ul>
-      <li><button id="play" type="button" onclick="play()">Play</button></li> 
-      <li><button id="pause" type="button" onclick="pause()">Pause</button></li> 
-      <li><button id="volumeMais" type="button" onclick="volumeMais()">Mais Volume</button></li> 
-      <li><button id="volumeMenos" type="button" onclick="volumeMenos()">Menos Volume</button></li> 
-      <li><button id="avancar" type="button" onclick="avancar()">Avançar</button></li> 
-      <li><button id="retroceder" type="button" onclick="retroceder()">Retroceder</button></li>
-    </ul>
-
-    <p id = "GFG_DOWN" style =  
-            "color:green; font-size: 20px; font-weight: bold;"> 
-    </p>
-
-    <script>
-      /*$('#GFG_UP').text("Click on button to get ID"); 
-
-      $("button").on('click',function() { 
-        var t = (this.id); 
-        $('#GFG_DOWN').text("ID = " + t); 
-      });  */
-    </script>
-    
-  </body>
+  Último gesto reconhecido: <b><span id="result"></span></b><br>
+  Instruções:
+  <ul>
+    <li>Play: <b>Incline para trás</b></li>
+    <li>Pause: <b>Incline para frente</b></li>
+    <li>Mais Volume: <b>Incline para direita</b></li>
+    <li>Menos Volume: <b>Incline para esquerda</b></li>
+    <li>Avançar: <b>Gire para direita</b></li>
+    <li>Retroceder: <b>Gire para esquerda</b></li>
+    <li><button type="button" onclick="teste()">Testar audio</button></li>
+  </ul>
+</body>
 </html>
