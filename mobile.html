@@ -17,87 +17,97 @@
   <script>
     window.focus();   
     var mytat = new tiltandtap({
-      tiltLeft :  {callback:left}, //volume-
-      tiltRight : {callback:right}, //volume+
-      tiltUp :    {callback:up}, //play
-      tiltDown:   {callback:down}, //pause
-      tiltClockwise: {callback:clockwise}, //time+
-      tiltConterclockwise : {callback: cc} //time-
+      tiltLeft :  {callback: volumeMenos}, //volume-
+      tiltRight : {callback: volumeMais}, //volume+
+      tiltUp :    {callback: play}, //play
+      tiltDown:   {callback: pause}, //pause
+      tiltClockwise: {callback: avancar}, //time+
+      tiltConterclockwise : {callback: retroceder} //time-
     });
 
-    function left(){
-     //Audio function
-      setVolume(-.1); //down by 10%
-     //feedback
-      audioMenosVolume(); //audivel
-      blinkMenosVolume(); //visual
-      window.navigator.vibrate(50); //tátil
-      document.getElementById("result").innerHTML = "esquerda"; //visual
-      console.log("esquerda"); //log     
-    }
-    function right(){
-     //Audio function
-      setVolume(.1) //up by 10%
-     //feedback
-      audioMaisVolume(); //audivel
-      blinkMaisVolume(); //visual
-      window.navigator.vibrate(50); //tátil
-      document.getElementById("result").innerHTML = "direita"; //visual
-      console.log("direita"); //log     
-    }
-    function up (){
-     //Play function
-      if(player.pause){
-        player.play();
+    function play(){
+       //Play function
+        if(player.pause){
+          player.play();
+        }
+       //feedback
+        audioPlay(); //audivel
+        blinkPlay(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "cima"; //visual
+        console.log("cima"); //log   
       }
-     //feedback
-      audioPlay(); //audivel
-      blinkPlay(); //visual
-      window.navigator.vibrate(50); //tátil
-      document.getElementById("result").innerHTML = "cima"; //visual
-      console.log("cima"); //log   
-    }
-    function down(){
-     //Pause function
-      if(player.play){
-         player.pause();
-      }
-     //feedback
-      audioPause(); //audivel
-      blinkPause(); //visual
-      window.navigator.vibrate(50); //tátil
-      document.getElementById("result").innerHTML = "baixo"; //visual
-      console.log("baixo"); //log
-    }
-    function clockwise(){
-     //Time function
-      setTime(10);
-     //feedback
-      audioAvancar(); //audivel
-      blinkAvancar(); //visual
-      window.navigator.vibrate(50); //tátil
-      document.getElementById("result").innerHTML = "horário"; //visual
-      console.log("horário"); //log
-    }
-    function cc(){
-     //Time function
-      setTime(-10);
-     //feedback
-      audioRetroceder(); //audivel
-      blinkRetroceder(); //visual
-      window.navigator.vibrate(50); //tátil
-      document.getElementById("result").innerHTML = "anti-horário"; //visual
-      console.log("anti-horário"); //log        
-    }
 
-    function teste(){
-      audioRetroceder();
-      audioPlay();
-      audioMenosVolume();
-      audioAvancar();
-      audioPause();
-      audioMaisVolume();
-    }
+
+      function pause(){
+       //Pause function
+        if(player.play){
+           player.pause();
+        }
+       //feedback
+        audioPause(); //audivel
+        blinkPause(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "baixo"; //visual
+        console.log("baixo"); //log
+      }
+
+
+      function volumeMais(){
+       //Audio function
+        setVolume(.1) //up by 10%
+       //feedback
+        audioMaisVolume(); //audivel
+        blinkMaisVolume(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "direita"; //visual
+        console.log("direita"); //log     
+      }
+
+
+      function volumeMenos(){
+       //Audio function
+        setVolume(-.1); //down by 10%
+       //feedback
+        audioMenosVolume(); //audivel
+        blinkMenosVolume(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "esquerda"; //visual
+        console.log("esquerda"); //log     
+      }
+
+
+      function avancar(){
+       //Time function
+        setTime(10);
+       //feedback
+        audioAvancar(); //audivel
+        blinkAvancar(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "horário"; //visual
+        console.log("horário"); //log
+      }
+
+
+      function retroceder(){
+       //Time function
+        setTime(-10);
+       //feedback
+        audioRetroceder(); //audivel
+        blinkRetroceder(); //visual
+        window.navigator.vibrate(50); //tátil
+        document.getElementById("result").innerHTML = "anti-horário"; //visual
+        console.log("anti-horário"); //log        
+      }
+
+      function teste(){
+        audioRetroceder();
+        audioPlay();
+        audioMenosVolume();
+        audioAvancar();
+        audioPause();
+        audioMaisVolume();
+      }
     </script>
 
     <title>Gesture4ALL</title>
