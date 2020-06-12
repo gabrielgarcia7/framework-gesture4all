@@ -79,12 +79,36 @@
     }
 
     function checkCookie() {
-      var username = getCookie("configured");
-      if (username == "yes") {
+      var configured = getCookie("configured");
+      if (configured == "yes" && checkAll() == true) {
         loadConfigs();
+        funcao1();
         alert("Already configured!");
+        
       } else {
         configuracao();
+      }
+    }
+
+    function funcao1(){
+      var x;
+      var r = confirm("Os botões já estão configurados. Pressione OK para continuar ou Cancelar para configurar novamente.");
+      if (r==true)
+        {
+        // x="você pressionou OK!";
+        }
+      else
+        {
+          configuracao();
+        }
+      document.getElementById("demo").innerHTML=x;
+    }
+
+    function checkAll() {
+      for (var i = 0; i < 6; i++) {
+        var gesto = getCookie(i);
+        if(gesto == "") return false;
+        else return true;
       }
     }
 
@@ -92,9 +116,7 @@
       for (var i = 0; i < 6; i++) {
         gestos[i] = getCookie(i);
       }
-    }
-
-    
+    }    
 
     function configuracao(){
 
