@@ -7,7 +7,7 @@ html{
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-    color: #666161;
+    color: #181818;
     font-family: "Source Sans Pro", Helvetica, sans-serif;
     font-size: 100%;
     font-weight: 300;
@@ -48,4 +48,17 @@ video {
 
 h1 {
   font-size: 18px;
+}
+
+main {
+      background-color: #BEBEBE;
+      padding: 3em;
+      margin: 3em;
+      text-align: center;
+      border-radius: 1em;
+}
+
+.link {
+      color: #404040;
+      font-size: 1.5em;
 }
