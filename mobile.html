@@ -39,27 +39,33 @@
       switch(arguments[0]){
 
         case 'inclinarTras':
-          realizarAcao(gestos[0]);
+          document.getElementById("play").click();
+          // realizarAcao(gestos[0]);
           break;
 
         case 'inclinarFrente':
-          realizarAcao(gestos[1]);
+          document.getElementById("pause").click();
+          // realizarAcao(gestos[1]);
           break;
 
         case 'inclinarDireita':
-          realizarAcao(gestos[2]);
+          document.getElementById("volumeMais").click();
+          // realizarAcao(gestos[2]);
           break;
 
         case 'inclinarEsquerda':
-          realizarAcao(gestos[3]);
+          document.getElementById("volumeMenos").click();
+          // realizarAcao(gestos[3]);
           break;
 
         case 'rotacaoDireita':
-          realizarAcao(gestos[4]);
+          document.getElementById("avancar").click();
+          // realizarAcao(gestos[4]);
           break;
 
         case 'rotacaoEsquerda':
-          realizarAcao(gestos[5]);
+          document.getElementById("retroceder").click();
+          // realizarAcao(gestos[5]);
           break;
       }  
     }
@@ -186,11 +192,11 @@
   </head>
 
   <body>
-    <script>
+    <!-- <script>
       $(document).ready(function(){
         configuracao();
       });
-    </script>
+    </script> -->
 
     <header id="header">
      <div>
@@ -201,12 +207,12 @@
   </header>
   <b>Opção 1: Testando com Smartphone</b><br>
   <a href="index.html">Voltar a tela anterior</a><br>
-  <video autoplay width="400" id="player" controls preload="auto">
+  <video width="400" id="player" controls preload="auto">
     <source src="assets/olhardigital.webm" type='video/webm; codecs="vp8, vorbis"' />
     <source src="assets/olhardigital.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
     Seu navegador não suporta vídeo em HTML 5.
   </video><br>
-  <p>v03</p>
+  <p>v04</p>
   Último gesto reconhecido: <b><span id="result"></span></b><br>
   Instruções:
   <ul>
