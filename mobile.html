@@ -163,7 +163,7 @@
         audioPlay(); //audivel
         blinkPlay(); //visual
         window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "cima"; //visual
+        document.getElementById("result").innerHTML = "play"; //visual
         console.log("cima"); //log   
       }
 
@@ -177,7 +177,7 @@
         audioPause(); //audivel
         blinkPause(); //visual
         window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "baixo"; //visual
+        document.getElementById("result").innerHTML = "pause"; //visual
         console.log("baixo"); //log
       }
 
@@ -189,7 +189,7 @@
         audioMaisVolume(); //audivel
         blinkMaisVolume(); //visual
         window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "direita"; //visual
+        document.getElementById("result").innerHTML = "mais volume"; //visual
         console.log("direita"); //log     
       }
 
@@ -201,7 +201,7 @@
         audioMenosVolume(); //audivel
         blinkMenosVolume(); //visual
         window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "esquerda"; //visual
+        document.getElementById("result").innerHTML = "menos volume"; //visual
         console.log("esquerda"); //log     
       }
 
@@ -213,7 +213,7 @@
         audioAvancar(); //audivel
         blinkAvancar(); //visual
         window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "horário"; //visual
+        document.getElementById("result").innerHTML = "avançar"; //visual
         console.log("horário"); //log
       }
 
@@ -225,7 +225,7 @@
         audioRetroceder(); //audivel
         blinkRetroceder(); //visual
         window.navigator.vibrate(50); //tátil
-        document.getElementById("result").innerHTML = "anti-horário"; //visual
+        document.getElementById("result").innerHTML = "retroceder"; //visual
         console.log("anti-horário"); //log        
       }
 
@@ -263,8 +263,7 @@
     <source src="assets/olhardigital.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
     Seu navegador não suporta vídeo em HTML 5.
   </video><br>
-  <p>v06</p>
-  Último gesto reconhecido: <b><span id="result"></span></b><br>
+  Última função reconhecida: <b><span id="result"></span></b><br>
   Instruções:
   <ul>
     <li><button id="play" type="button" onclick="play()">Play</button></li> 
@@ -275,8 +274,8 @@
     <li><button id="retroceder" type="button" onclick="retroceder()">Retroceder</button></li>
   </ul>
 
-  <p id = "GFG_DOWN" style =  
+  <!-- <p id = "GFG_DOWN" style =  
           "color:green; font-size: 20px; font-weight: bold;"> 
-  </p>
+  </p> -->
 </body>
 </html>
