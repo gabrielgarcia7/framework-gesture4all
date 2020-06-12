@@ -35,25 +35,24 @@
     ];
 
     function inclinarEsquerda(){
-      document.getElementById("play").click();
-      alert("funfou");
+      document.getElementById(gestos[0]).click();
 
     }
     function inclinarDireita(){
-      document.getElementById("pause").click();
+      document.getElementById(gestos[1]).click();
     }
 
     function inclinarTras(){
-      document.getElementById("volumeMais").click();
+      document.getElementById(gestos[2]).click();
     }
     function inclinarFrente(){
-      document.getElementById("volumeMenos").click();
+      document.getElementById(gestos[3]).click();
     }
     function rotacaoDireita(){
-      document.getElementById("avancar").click();
+      document.getElementById(gestos[4]).click();
     }
     function rotacaoEsquerda(){
-      document.getElementById("retroceder").click();
+      document.getElementById(gestos[5]).click();
     }
 
     
@@ -180,11 +179,11 @@
   </head>
 
   <body>
-    <!-- <script>
+    <script>
       $(document).ready(function(){
         configuracao();
       });
-    </script> -->
+    </script>
 
     <header id="header">
      <div>
